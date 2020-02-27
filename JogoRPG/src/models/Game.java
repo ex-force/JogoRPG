@@ -10,7 +10,8 @@ public class Game {
     Player playerTwo;
 
     public Game() {
-        battleSystem = new BattleSystem();
+	IDice dice = new Dice(1, 20);
+        battleSystem = new BattleSystem(dice);
         battles = new ArrayList<Battle>();
     }
     
