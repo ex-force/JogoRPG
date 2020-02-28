@@ -5,12 +5,15 @@ import java.util.List;
 public class Player {
 
 	public String name;
-	public List<Character> personagem;
+	public List<Character> characters;
 
-	public Player(String name, List<Character> personagem) {
-		super();
+	public Player(String name, List<Character> characters){
 		this.name = name;
-		this.personagem = personagem;
+		this.characters = characters;
+	}
+
+	public List<Character> getCharacters(){
+		return characters;
 	}
 
 }

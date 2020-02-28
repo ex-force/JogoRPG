@@ -47,7 +47,11 @@ public class Game {
     }
 
     private void generatePlayers() {
-        CharactersFactory charactersFactory = new CharactersFactory();
+        List<TypeClass> listClasses = new ArrayList<TypeClass>();
+        listClasses.add(TypeClass.Dragon);
+        listClasses.add(TypeClass.Knight);
+
+        CharactersFactory charactersFactory = new CharactersFactory(listClasses);
 
         GameSystem.showMessage("Digite o nome do primeiro jogador:");
         String namePlayerOne = GameSystem.readString();

@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-public class CharacterFactory {
+public class CharactersFactory {
 
 	private List<TypeClass> typeClasses;
 
-	public CharacterFactory(List<TypeClass> typeClasses) {
+	public CharactersFactory(List<TypeClass> typeClasses) {
 		this.typeClasses = typeClasses;
 
 	}
 
-	public List<Character> GetCharacters() {
+	public List<Character> getCharacters() {
 
 		List<Character> characters = new ArrayList<Character>();
 

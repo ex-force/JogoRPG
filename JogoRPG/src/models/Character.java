@@ -2,11 +2,11 @@ package models;
 
 public class  Character {
 
-	public int hp;
-	public int attack;
-	public int defense;
-	public int level;
-	public int exp;
+	protected int hp;
+	protected int attack;
+	protected int defense;
+	protected int level;
+	protected int exp;
 	
 	protected TypeClass typeClass;
 	
@@ -18,6 +18,9 @@ public class  Character {
 	}
 	public int speed;
 	
+	public TypeClass getTypeClass(){
+		return typeClass;
+	}
 	
 	public int getHp() {
 		return hp;

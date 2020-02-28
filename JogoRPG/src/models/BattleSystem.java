@@ -39,7 +39,7 @@ public class BattleSystem implements IBattleSystem {
     }
 
     @Override
-    public Character getFirstAttacker(Character characterOne, Character characterTwo) {
+    public int[] getOrderAttack(Character characterOne, Character characterTwo) {
         IDice diceOne = new Dice(1, characterOne.getSpeed());
         IDice diceTwo = new Dice(1, characterTwo.getSpeed());
 
@@ -47,15 +47,21 @@ public class BattleSystem implements IBattleSystem {
         int resultTwo;
 
         do{
-            resultOne = diceOne.rollDice;
-            resultTwo = diceTwo.rollDice;
+            resultOne = diceOne.rollDice();
+            resultTwo = diceTwo.rollDice();
         }while (resultOne == resultTwo);
 
+        int[] orderAttack = new int[2];
+
         if(resultOne > resultTwo){
-            return characterOne;
+            orderAttack[0] = 0;
+            orderAttack[1] = 1;
+            return orderAttack;
         }
         else{
-            return characterTwo;
+            orderAttack[0] = 1;
+            orderAttack[1] = 0;
+            return orderAttack;
         }
     }
 
