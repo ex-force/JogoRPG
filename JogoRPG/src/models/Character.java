@@ -3,6 +3,7 @@ package models;
 public class  Character {
 
 	protected int hp;
+	protected int hpMax;
 	protected int attack;
 	protected int defense;
 	protected int level;
@@ -11,7 +12,9 @@ public class  Character {
 	protected TypeClass typeClass;
 	
 	public Character() {
-		hp = 50;
+		hpMax = 50;
+		level = 1;
+		hp = hpMax;
 		attack = 5;
 		defense = 5;
 		speed = 5;
@@ -20,6 +23,14 @@ public class  Character {
 	
 	public TypeClass getTypeClass(){
 		return typeClass;
+	}
+
+	public void setHpMax(int hpMax){
+		this.hpMax = hpMax;
+	}
+
+	public int getHpMax(){
+		return hpMax;
 	}
 	
 	public int getHp() {

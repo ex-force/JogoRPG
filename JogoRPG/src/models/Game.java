@@ -10,8 +10,7 @@ public class Game {
     Player playerTwo;
 
     public Game() {
-	IDice dice = new Dice(1, 20);
-        battleSystem = new BattleSystem(dice);
+        battleSystem = new BattleSystem(new Dice(1, 20));
         battles = new ArrayList<Battle>();
     }
     
@@ -25,9 +24,9 @@ public class Game {
         boolean playing = true;
 
         while(playing){
-            GameSystem.showMessage("----------Menu principal----------");
-            GameSystem.showMessage("1 - Batalhar");
-            GameSystem.showMessage("2 - Sair");
+            GameSystem.showMessage("\n----------Main menu----------");
+            GameSystem.showMessage("1 - New battle");
+            GameSystem.showMessage("2 - Exit game");
 
             int option = GameSystem.readInt();
 
@@ -36,11 +35,11 @@ public class Game {
                     goToBattle();
                     break;
                 case 2:
-                    GameSystem.showMessage("GAME OVER");
+                    GameSystem.showMessage("\nGAME OVER");
                     playing = false;
                     break;
                 default:
-                    GameSystem.showMessage("Selecione uma opção válida.");
+                    GameSystem.showMessage("\nOption invalid.");
                     break;
             }
         }
@@ -53,13 +52,13 @@ public class Game {
 
         CharactersFactory charactersFactory = new CharactersFactory(listClasses);
 
-        GameSystem.showMessage("Digite o nome do primeiro jogador:");
+        GameSystem.showMessage("\nEnter the name of the player one:");
         String namePlayerOne = GameSystem.readString();
         List<Character> charactersPlayerOne = charactersFactory.getCharacters();
         playerOne = new Player(namePlayerOne, charactersPlayerOne);
         
 
-        GameSystem.showMessage("Digite o nome do segundo jogador:");
+        GameSystem.showMessage("\nEnter the name of the player two:");
         String namePlayerTwo = GameSystem.readString();
         List<Character> charactersPlayerTwo = charactersFactory.getCharacters();
         playerTwo = new Player(namePlayerTwo, charactersPlayerTwo);
@@ -68,11 +67,37 @@ public class Game {
     private void goToBattle() {
         Battle battle = new Battle(battleSystem);
 
-        battle.selectCharacterOne(playerOne.getCharacters());
-        
-        battle.selectCharacterTwo(playerTwo.getCharacters());
+        boolean battleStarted = false;
 
-        battle.startBattle();
+        while(!battleStarted){
+
+            GameSystem.showMessage("\n----------New battle----------");
+            GameSystem.showMessage("1 - Select character one");
+            GameSystem.showMessage("2 - Select character two");
+            GameSystem.showMessage("3 - Start battle");
+            
+            int option = GameSystem.readInt();
+            switch(option){
+                case 1:
+                    battle.selectCharacterOne(playerOne.getCharacters());
+                    break;
+                case 2:
+                    battle.selectCharacterTwo(playerTwo.getCharacters());
+                    break;
+                case 3:
+                    try{
+                        battle.startBattle();
+                        battleStarted = true;
+                    }
+                    catch(Exception e){
+                        GameSystem.showMessage("\nErro. " + e.getMessage());
+                    }
+                    break;
+                default:
+                    GameSystem.showMessage("Option invalid");
+                    break;
+            }
+        }
 
         battles.add(battle);
     }

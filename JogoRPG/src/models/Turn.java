@@ -14,7 +14,9 @@ public class Turn {
     }
 
     private void attack(Character attacker, Character defender){
-        GameSystem.showMessage("It's the turn of the "+ attacker.getTypeClass().toString());
+        if(attacker.getHp() == 0) return;
+
+        GameSystem.showMessage("\nIt's the turn of the "+ attacker.getTypeClass().toString());
         GameSystem.showMessage("----------Options----------");
         GameSystem.showMessage("1 - Attack");
         boolean optionIsvalid = false;
@@ -26,9 +28,17 @@ public class Turn {
                 int damage = battleSystem.calculesDamage(attacker, defender);
                 battleSystem.applyDamage(damage, defender);
                 int exp = battleSystem.calculesExp(damage);
-                battleSystem.applyExp(exp, attacker);   
-                GameSystem.showMessage
-                (attacker.getTypeClass().toString()+ " attacked with damage " + damage + " and won " + exp + " exp.");
+                
+                if(damage > 0){
+                    GameSystem.showMessage
+                    ("\n"+attacker.getTypeClass().toString()+ " attacked "+defender.getTypeClass().toString() +" with " + damage + " damage and won " + exp + " exp.");
+                }
+                else{
+                    GameSystem.showMessage("\n"+defender.getTypeClass().toString() + " defended the attack.");
+                }
+
+                battleSystem.applyExp(exp, attacker);
+                
                 optionIsvalid = true;
             }else{
                 GameSystem.showMessage("Invalid option. Choose again");

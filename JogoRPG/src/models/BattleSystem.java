@@ -12,6 +12,12 @@ public class BattleSystem implements IBattleSystem {
         int atk = attacker.getAttack() * dice.rollDice();
         int def = defender.getDefense() * dice.rollDice();
         int damage = atk - def;
+        if(damage < 0){
+            damage = 0;
+        }
+        if(damage > defender.getHp()){
+            damage = defender.getHp();
+        }
 
         return damage;
     }
@@ -29,7 +35,7 @@ public class BattleSystem implements IBattleSystem {
     @Override
     public void applyExp(int exp, Character character) {
         int newExp = character.getExp() + exp;
-        if(newExp > 10){
+        if(newExp >= 10){
             character.setExp(0);
             levelUp(character);
         }
@@ -67,9 +73,16 @@ public class BattleSystem implements IBattleSystem {
 
     @Override
     public void levelUp(Character character) {
-        character.setHp(character.getHp() + 10);
+        character.setLevel(character.getLevel() + 1);
+        character.setHpMax(character.getHpMax() + 10);
         character.setAttack(character.getAttack() + 5);
         character.setDefense(character.getDefense() + 2);
         character.setSpeed(character.getSpeed() + 2);
+
+        GameSystem.showMessage(character.getTypeClass().toString() + " level up."
+            +" Hp: " + character.getHpMax()
+            +" | Atack: " + character.getAttack()
+            +" | Defense: " + character.getDefense()
+            +" | Speed: " + character.getSpeed());
     }
 }

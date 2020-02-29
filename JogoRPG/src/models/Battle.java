@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Battle {
@@ -11,12 +12,18 @@ public class Battle {
     private List<Turn> turns;
 
     public Battle(IBattleSystem battleSystem) {
+        turns = new ArrayList<Turn>();
         this.battleSystem = battleSystem;
     }
 
     private Character selectCharacter(List<Character> characters){
         for (int i = 0; i < characters.size() ; i++) {
-            GameSystem.showMessage((i+1)+ " - " + characters.get(i).getTypeClass().toString());
+            GameSystem.showMessage((i+1)+ " - " + characters.get(i).getTypeClass().toString()
+            +" Level: " + characters.get(i).getLevel()
+            +" | Hp: " + characters.get(i).getHp()
+            +" | Atack: " + characters.get(i).getAttack()
+            +" | Defense: " + characters.get(i).getDefense()
+            +" | Speed: " + characters.get(i).getSpeed());
         }
         
         do{
@@ -33,7 +40,7 @@ public class Battle {
 
     public void selectCharacterOne(List<Character> characters){
         if (characters.size() > 0) {
-            GameSystem.showMessage("Player one choose your character ");
+            GameSystem.showMessage("\nPlayer one choose your character ");
             
             characterOne = selectCharacter(characters);
             GameSystem.showMessage("Character one is "+ characterOne.getTypeClass().toString());
@@ -46,7 +53,7 @@ public class Battle {
 
     public void selectCharacterTwo(List<Character> characters){
         if (characters.size() > 0) {
-            GameSystem.showMessage("Player two choose your character ");
+            GameSystem.showMessage("\nPlayer two choose your character ");
            
             characterTwo = selectCharacter(characters);
             GameSystem.showMessage("Character two is "+ characterTwo.getTypeClass().toString());
@@ -56,7 +63,7 @@ public class Battle {
         }
     }
 
-    public void startBattle(){
+    public void startBattle() throws Exception{
         if (characterOne != null && characterTwo != null){
             while (characterOne.getHp() > 0 && characterTwo.getHp() > 0) {
                 Turn turn = new Turn(characterOne, characterTwo, battleSystem);
@@ -73,13 +80,13 @@ public class Battle {
                 GameSystem.showMessage("Player one wins");
             }
 
-        }else{
-            if (characterOne == null){
-                GameSystem.showMessage("Please choose character one");
-            }else{
-                GameSystem.showMessage("Please choose character two");
-            }
+            characterOne.setHp(characterOne.getHpMax());
+            characterOne = null;
+            characterTwo.setHp(characterTwo.getHpMax());
+            characterTwo = null;
 
+        }else{
+            throw new Exception("Characters were not selected");
         }
     }
 }
