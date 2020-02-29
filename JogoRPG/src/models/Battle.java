@@ -65,6 +65,7 @@ public class Battle {
 
     public void startBattle() throws Exception{
         if (characterOne != null && characterTwo != null){
+            GameSystem.showMessage("\nBATTLE STARTED");
             while (characterOne.getHp() > 0 && characterTwo.getHp() > 0) {
                 Turn turn = new Turn(characterOne, characterTwo, battleSystem);
 
@@ -74,10 +75,10 @@ public class Battle {
             }
 
             if (characterOne.getHp() == 0 && characterTwo.getHp() > 0) {
-                GameSystem.showMessage("Player two wins");
+                GameSystem.showMessage("\nPLAYER TWO WINS");
             }
             if (characterOne.getHp() > 0 && characterTwo.getHp() == 0) {
-                GameSystem.showMessage("Player one wins");
+                GameSystem.showMessage("\nPLAYER ONE WINS");
             }
 
             characterOne.setHp(characterOne.getHpMax());

@@ -67,14 +67,15 @@ public class Game {
     private void goToBattle() {
         Battle battle = new Battle(battleSystem);
 
-        boolean battleStarted = false;
+        boolean battleEnded = false;
 
-        while(!battleStarted){
+        while(!battleEnded){
 
             GameSystem.showMessage("\n----------New battle----------");
             GameSystem.showMessage("1 - Select character one");
             GameSystem.showMessage("2 - Select character two");
             GameSystem.showMessage("3 - Start battle");
+            GameSystem.showMessage("4 - Back to the main menu");
             
             int option = GameSystem.readInt();
             switch(option){
@@ -87,11 +88,14 @@ public class Game {
                 case 3:
                     try{
                         battle.startBattle();
-                        battleStarted = true;
+                        battleEnded = true;
                     }
                     catch(Exception e){
                         GameSystem.showMessage("\nErro. " + e.getMessage());
                     }
+                    break;
+                case 4:
+                    battleEnded = true;
                     break;
                 default:
                     GameSystem.showMessage("Option invalid");
