@@ -72,18 +72,36 @@ public class Game {
         while(!battleEnded){
 
             GameSystem.showMessage("\n----------New battle----------");
-            GameSystem.showMessage("1 - Select character one");
-            GameSystem.showMessage("2 - Select character two");
+            if(battle.getCharacterOne() == null){
+                GameSystem.showMessage("1 - Select character one (none)");
+            }
+            else{
+                GameSystem.showMessage("1 - Select character one ("+battle.getCharacterOne().getTypeClass().toString()+")");
+            }
+            if(battle.getCharacterTwo() == null){
+                GameSystem.showMessage("2 - Select character two (none)");
+            }
+            else{
+                GameSystem.showMessage("1 - Select character one ("+battle.getCharacterTwo().getTypeClass().toString()+")");
+            }
             GameSystem.showMessage("3 - Start battle");
             GameSystem.showMessage("4 - Back to the main menu");
             
             int option = GameSystem.readInt();
             switch(option){
                 case 1:
-                    battle.selectCharacterOne(playerOne.getCharacters());
+                    try {
+                        battle.selectCharacterOne(playerOne.getCharacters());
+                    } catch (Exception e) {
+                        GameSystem.showMessage("\n" + e.getMessage());
+                    }
                     break;
                 case 2:
-                    battle.selectCharacterTwo(playerTwo.getCharacters());
+                    try {
+                        battle.selectCharacterTwo(playerTwo.getCharacters());
+                    } catch (Exception e) {
+                        GameSystem.showMessage("\n" + e.getMessage());
+                    }
                     break;
                 case 3:
                     try{
@@ -91,14 +109,14 @@ public class Game {
                         battleEnded = true;
                     }
                     catch(Exception e){
-                        GameSystem.showMessage("\nErro. " + e.getMessage());
+                        GameSystem.showMessage("\n" + e.getMessage());
                     }
                     break;
                 case 4:
                     battleEnded = true;
                     break;
                 default:
-                    GameSystem.showMessage("Option invalid");
+                    GameSystem.showMessage("\nOption invalid");
                     break;
             }
         }

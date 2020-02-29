@@ -1,7 +1,5 @@
 package models;
 
-import java.util.List;
-
 public interface IBattleSystem {
     int calculesDamage(Character attacker, Character defender);
     void applyDamage(int damage, Character character);

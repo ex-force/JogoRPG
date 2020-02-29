@@ -16,6 +16,14 @@ public class Battle {
         this.battleSystem = battleSystem;
     }
 
+    public Character getCharacterOne(){
+        return characterOne;
+    }
+
+    public Character getCharacterTwo(){
+        return characterTwo;
+    }
+
     private Character selectCharacter(List<Character> characters){
         for (int i = 0; i < characters.size() ; i++) {
             GameSystem.showMessage((i+1)+ " - " + characters.get(i).getTypeClass().toString()
@@ -38,7 +46,9 @@ public class Battle {
         }while (true);
     }
 
-    public void selectCharacterOne(List<Character> characters){
+    public void selectCharacterOne(List<Character> characters) throws Exception{
+        if(characters.size() == 0) throw new Exception("There are no characters to choose.");
+
         if (characters.size() > 0) {
             GameSystem.showMessage("\nPlayer one choose your character ");
             
