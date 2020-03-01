@@ -15,7 +15,7 @@ public class Dice implements IDice{
 
 		var diferenca = max - min;
 
-		int resultado = min + new Random().nextInt(diferenca);
+		int resultado = min + new Random().nextInt(diferenca + 1);
 
 		return resultado;
 	}

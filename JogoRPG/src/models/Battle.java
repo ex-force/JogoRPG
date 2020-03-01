@@ -46,31 +46,23 @@ public class Battle {
         }while (true);
     }
 
-    public void selectCharacterOne(List<Character> characters) throws Exception{
-        if(characters.size() == 0) throw new Exception("There are no characters to choose.");
-
-        if (characters.size() > 0) {
-            GameSystem.showMessage("\nPlayer one choose your character ");
+    public void selectCharacterOne(List<Character> characters) throws Exception {
+        if(characters == null || characters.size() == 0) throw new Exception("There are no characters to choose.");
+        
+        GameSystem.showMessage("\nPlayer one choose your character ");
             
-            characterOne = selectCharacter(characters);
-            GameSystem.showMessage("Character one is "+ characterOne.getTypeClass().toString());
-
-        }else{
-            GameSystem.showMessage("Player One don't have characters");
-        }
+        characterOne = selectCharacter(characters);
+        GameSystem.showMessage("Character one is "+ characterOne.getTypeClass().toString());
 
     }
 
-    public void selectCharacterTwo(List<Character> characters){
-        if (characters.size() > 0) {
-            GameSystem.showMessage("\nPlayer two choose your character ");
-           
-            characterTwo = selectCharacter(characters);
-            GameSystem.showMessage("Character two is "+ characterTwo.getTypeClass().toString());
-       
-        }else{
-            GameSystem.showMessage("Player One don't have characters");
-        }
+    public void selectCharacterTwo(List<Character> characters) throws Exception {
+        if(characters == null || characters.size() == 0) throw new Exception("There are no characters to choose.");
+        
+        GameSystem.showMessage("\nPlayer two choose your character ");
+            
+        characterTwo = selectCharacter(characters);
+        GameSystem.showMessage("Character two is "+ characterTwo.getTypeClass().toString());
     }
 
     public void startBattle() throws Exception{
